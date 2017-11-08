@@ -123,6 +123,19 @@ function addItem(item, isNew) {
         row.innerHTML = innerHTML + attachButton + "</td><td class = 'contentAction'><span class='deleteBtn' onclick='deleteItem(this)' title='delete me'></span></td>";
     
     }
-
+    function deleteItem(deleteBtnNode) {
+        var row = deleteBtnNode.parentNode.parentNode;
+        var attribId = row.getAttribute('data-id');
+        if (attribId) {
+            xhrDelete(REST_DATA + '?id=' + row.getAttribute('data-id'), function() {
+                row.parentNode.removeChild(row);
+            }, function(err) {
+                console.error(err);
+            });
+        } else if (attribId == null) {
+            row.parentNode.removeChild(row);
+        }
+    }
+    
     
 loadItems();
