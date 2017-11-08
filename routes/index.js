@@ -12,5 +12,5 @@ exports.index1 = function(req, res){
 };
 
 exports.index2 = function(req, res){
-  res.render('index2.html', { title: 'index1' });
+  res.render('index2.html', {u: 'index1'});
 };

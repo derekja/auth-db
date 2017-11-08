@@ -59,7 +59,7 @@ app.use(methodOverride());
 
 app.use('/style', express.static(path.join(__dirname, '/views/style')));
 
-app.use(auth.connect(basic));
+
 
 app.use(express.static(path.join(__dirname, 'public')));
 // development only
@@ -133,7 +133,6 @@ initDBConnection();
 
 app.get('/', routes.index);
 app.get('/one', routes.index1);
-app.get('/two', routes.index2);
 
 function createResponseData(id, name, value, attachments) {
 
@@ -474,6 +473,9 @@ app.get('/api/favorites', function(request, response) {
 
 //cars routes
 
+app.use(auth.connect(basic));
+app.get('/two', routes.index2);
+
 app.post('/api/cars', function(request, response) {
     
         console.log("add a car..");
@@ -483,6 +485,7 @@ app.post('/api/cars', function(request, response) {
         var value = request.body.value;
 
         console.log(request.body.name);
+        console.log(request.user);
 
         if (id === undefined) {
             // Generated random id

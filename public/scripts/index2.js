@@ -27,4 +27,4 @@ function addcar() {
     });
 }
 
-
+console.log(document);
