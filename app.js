@@ -475,6 +475,7 @@ app.get('/api/favorites', function(request, response) {
 
 app.use(auth.connect(basic));
 app.get('/two', routes.index2);
+app.locals.somevar = 'testVar';
 
 app.post('/api/cars', function(request, response) {
     

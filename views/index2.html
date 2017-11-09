@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<title>index1</title>
+	<title><%=title%></title>
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 	<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,minimum-scale=1,user-scalable=no"/>
 	<meta name="apple-mobile-web-app-capable" content="yes" />
@@ -25,6 +25,8 @@
 		<input id="newcar">
 		<button id="addcar" onclick="addcar()">add car</button>
 
+		<br><br><%=somevar%>
+		<br><br>
 		<%- include('footer',{u: u}) %>
 
 	<script type="text/javascript" src="/scripts/util.js"></script>
