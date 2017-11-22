@@ -13,5 +13,6 @@ exports.index1 = function(req, res){
 
 exports.index2 = function(req, res){
   var user = req.user;
+  console.log(req);
   res.render('index2.html', {u: user, title: 'index2'});
 };

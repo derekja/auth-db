@@ -3,8 +3,8 @@ applications:
   memory: 256M
   instances: 1
   domain: mybluemix.net
-  name: auth-db
-  host: auth-db
+  name: chatDBdemo
+  host: chatDBdemo
   disk_quota: 1024M
   services:
-  - auth-db-cloudantNoSQLDB
+  - chatDBdemo-cloudantNoSQLDB

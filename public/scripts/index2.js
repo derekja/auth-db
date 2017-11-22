@@ -1,10 +1,6 @@
 // index.js
 
 var REST_DATA = 'api/cars';
-var KEY_ENTER = 13;
-var defaultItems = [
-
-];
 
 var item = 0;
 
