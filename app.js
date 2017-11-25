@@ -9,9 +9,6 @@ var express = require('express'),
     path = require('path'),
     fs = require('fs');
 
-
-console.log(basic);
-
 var app = express();
 
 var db;
@@ -499,6 +496,75 @@ app.post('/api/cars', function(request, response) {
     
     });
     
+    app.get('/api/cars', function(request, response) {
+        
+            console.log("get cars");
+   
+            var carList = [];
+            var i = 0;
+            db2.list(function(err, body) {
+                if (!err) {
+                    var len = body.rows.length;
+                    console.log('total # of cars -> ' + len);
+                    if (len == 0) {
+                        // push sample data
+                        // save doc
+                        var docName = 'simple_doc';
+                        var docDesc = 'A simple Document';
+                        db2.insert({
+                            name: docName,
+                            value: 'A sample Document'
+                        }, '', function(err, doc) {
+                            if (err) {
+                                console.log(err);
+                            } else {
+        
+                                console.log('Document : ' + JSON.stringify(doc));
+                                var responseData = createResponseData(
+                                    doc.id,
+                                    docName,
+                                    docDesc, []);
+                                carList.push(responseData);
+                                response.write(JSON.stringify(carList));
+                                console.log(JSON.stringify(carList));
+                                console.log('ending response...');
+                                response.end();
+                            }
+                        });
+                    } else {
+        
+                        body.rows.forEach(function(document) {
+        
+                            db2.get(document.id, {
+                                revs_info: true
+                            }, function(err, doc) {
+                                if (!err) {
+                                    var responseData = createResponseData(
+                                            doc._id,
+                                            doc.name,
+                                            doc.value, []);
+                                    carList.push(responseData);
+                                    i++;
+                                    if (i >= len) {
+                                        response.write(JSON.stringify(carList));
+                                        console.log('ending response...');
+                                        response.end();
+                                    }
+                                } else {
+                                    console.log(err);
+                                }
+                            });
+        
+                        });
+                    }
+        
+                } else {
+                    console.log(err);
+                }
+            });
+        
+        });
+        
 
 
 http.createServer(app).listen(app.get('port'), '0.0.0.0', function() {
