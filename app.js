@@ -10,13 +10,6 @@ var express = require('express'),
     fs = require('fs');
 
 
-// Authentication module.
-var auth = require('http-auth');
-var basic = auth.basic({
-	realm: "auth-db",
-	file: __dirname + "/public/data/passwords"
-});
-
 console.log(basic);
 
 var app = express();
@@ -473,7 +466,6 @@ app.get('/api/favorites', function(request, response) {
 
 //cars routes
 
-app.use(auth.connect(basic));
 app.get('/two', routes.index2);
 app.locals.somevar = 'testVar';
 
